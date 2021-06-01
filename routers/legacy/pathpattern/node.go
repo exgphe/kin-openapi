@@ -297,7 +297,7 @@ func (currentNode *Node) matchRemaining(remaining string, paramValues []string) 
 			if suffix.Node.VariableNames == nil && suffix.Node.Suffixes != nil && suffix.Node.Suffixes.Len() > 0 && suffix.Node.Suffixes[0].Pattern == "," {
 				suffix.Node = suffix.Node.Suffixes[0].Node.Suffixes[0].Node
 			}
-			newParamValues := append(paramValues, remaining[:i])
+			newParamValues := append(paramValues, strings.Split(remaining[:i], ",")...)
 			newRemaining := remaining[i:]
 			resultNode, resultValues = suffix.Node.matchRemaining(newRemaining, newParamValues)
 		case SuffixKindEverything:
