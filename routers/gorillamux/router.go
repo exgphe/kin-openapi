@@ -12,8 +12,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/getkin/kin-openapi/openapi3"
-	"github.com/getkin/kin-openapi/routers"
+	"github.com/exgphe/kin-openapi/openapi3"
+	"github.com/exgphe/kin-openapi/routers"
 	"github.com/gorilla/mux"
 )
 

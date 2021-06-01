@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/getkin/kin-openapi/jsoninfo"
+	"github.com/exgphe/kin-openapi/jsoninfo"
 	"github.com/go-openapi/jsonpointer"
 )
 

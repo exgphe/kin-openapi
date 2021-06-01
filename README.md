@@ -1,6 +1,6 @@
-[![CI](https://github.com/getkin/kin-openapi/workflows/go/badge.svg)](https://github.com/getkin/kin-openapi/actions)
-[![Go Report Card](https://goreportcard.com/badge/github.com/getkin/kin-openapi)](https://goreportcard.com/report/github.com/getkin/kin-openapi)
-[![GoDoc](https://godoc.org/github.com/getkin/kin-openapi?status.svg)](https://godoc.org/github.com/getkin/kin-openapi)
+[![CI](https://github.com/exgphe/kin-openapi/workflows/go/badge.svg)](https://github.com/exgphe/kin-openapi/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/exgphe/kin-openapi)](https://goreportcard.com/report/github.com/exgphe/kin-openapi)
+[![GoDoc](https://godoc.org/github.com/exgphe/kin-openapi?status.svg)](https://godoc.org/github.com/exgphe/kin-openapi)
 [![Join Gitter Chat Channel -](https://badges.gitter.im/getkin/kin.svg)](https://gitter.im/getkin/kin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # Introduction
@@ -13,13 +13,13 @@ The project has received pull requests from many people. Thanks to everyone!
 
 Here's some projects that depend on _kin-openapi_:
   * [https://github.com/Tufin/oasdiff](https://github.com/Tufin/oasdiff) - "A diff tool for OpenAPI Specification 3"
-  * [github.com/getkin/kin](https://github.com/getkin/kin) - "A configurable backend"
+  * [github.com/exgphe/kin](https://github.com/exgphe/kin) - "A configurable backend"
   * [github.com/danielgtaylor/apisprout](https://github.com/danielgtaylor/apisprout) - "Lightweight, blazing fast, cross-platform OpenAPI 3 mock server with validation"
   * [github.com/deepmap/oapi-codegen](https://github.com/deepmap/oapi-codegen) - Generate Go server boilerplate from an OpenAPIv3 spec document
   * [github.com/dunglas/vulcain](https://github.com/dunglas/vulcain) - "Use HTTP/2 Server Push to create fast and idiomatic client-driven REST APIs"
   * [github.com/danielgtaylor/restish](https://github.com/danielgtaylor/restish) - "...a CLI for interacting with REST-ish HTTP APIs with some nice features built-in"
   * [github.com/goadesign/goa](https://github.com/goadesign/goa) - "Goa is a framework for building micro-services and APIs in Go using a unique design-first approach."
-  * (Feel free to add your project by [creating an issue](https://github.com/getkin/kin-openapi/issues/new) or a pull request)
+  * (Feel free to add your project by [creating an issue](https://github.com/exgphe/kin-openapi/issues/new) or a pull request)
 
 ## Alternatives
 * [go-swagger](https://github.com/go-swagger/go-swagger) stated [*OpenAPIv3 won't be supported*](https://github.com/go-swagger/go-swagger/issues/1122#issuecomment-575968499)
@@ -30,16 +30,16 @@ Here's some projects that depend on _kin-openapi_:
 * See [https://github.com/OAI](https://github.com/OAI)'s [great tooling list](https://github.com/OAI/OpenAPI-Specification/blob/master/IMPLEMENTATIONS.md)
 
 # Structure
-  * _openapi2_ ([godoc](https://godoc.org/github.com/getkin/kin-openapi/openapi2))
+  * _openapi2_ ([godoc](https://godoc.org/github.com/exgphe/kin-openapi/openapi2))
     * Support for OpenAPI 2 files, including serialization, deserialization, and validation.
-  * _openapi2conv_ ([godoc](https://godoc.org/github.com/getkin/kin-openapi/openapi2conv))
+  * _openapi2conv_ ([godoc](https://godoc.org/github.com/exgphe/kin-openapi/openapi2conv))
     * Converts OpenAPI 2 files into OpenAPI 3 files.
-  * _openapi3_ ([godoc](https://godoc.org/github.com/getkin/kin-openapi/openapi3))
+  * _openapi3_ ([godoc](https://godoc.org/github.com/exgphe/kin-openapi/openapi3))
     * Support for OpenAPI 3 files, including serialization, deserialization, and validation.
-  * _openapi3filter_ ([godoc](https://godoc.org/github.com/getkin/kin-openapi/openapi3filter))
+  * _openapi3filter_ ([godoc](https://godoc.org/github.com/exgphe/kin-openapi/openapi3filter))
     * Validates HTTP requests and responses
     * Provides a [gorilla/mux](https://github.com/gorilla/mux) router for OpenAPI operations
-  * _openapi3gen_ ([godoc](https://godoc.org/github.com/getkin/kin-openapi/openapi3gen))
+  * _openapi3gen_ ([godoc](https://godoc.org/github.com/exgphe/kin-openapi/openapi3gen))
     * Generates `*openapi3.Schema` values for Go types.
 
 # Some recipes
@@ -70,8 +70,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/getkin/kin-openapi/openapi3filter"
-	legacyrouter "github.com/getkin/kin-openapi/routers/legacy"
+	"github.com/exgphe/kin-openapi/openapi3filter"
+	legacyrouter "github.com/exgphe/kin-openapi/routers/legacy"
 )
 
 func main() {
@@ -208,7 +208,7 @@ func arrayUniqueItemsChecker(items []interface{}) bool {
 * Renamed `routers.Route.Swagger` to `routers.Route.Spec`.
 
 ### v0.51.0
-* Type `openapi3filter.Route` moved to `routers` (and `Route.Handler` was dropped. See https://github.com/getkin/kin-openapi/issues/329)
+* Type `openapi3filter.Route` moved to `routers` (and `Route.Handler` was dropped. See https://github.com/exgphe/kin-openapi/issues/329)
 * Type `openapi3filter.RouteError` moved to `routers` (so did `ErrPathNotFound` and `ErrMethodNotAllowed` which are now `RouteError`s)
 * Routers' `FindRoute(...)` method now takes only one argument: `*http.Request`
 * `getkin/kin-openapi/openapi3filter.Router` moved to `getkin/kin-openapi/routers/legacy`

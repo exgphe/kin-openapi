@@ -67,7 +67,7 @@ jobs:
     - run: go test ./...
     - run: |
         cd openapi3/testdata
-        go get -u -v github.com/getkin/kin-openapi
+        go get -u -v github.com/exgphe/kin-openapi
         go test -tags with_embed ./...
         cd -
       if: matrix.go != '1.14'
