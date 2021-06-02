@@ -25,7 +25,7 @@ type Routers []*Router
 func (rs Routers) FindRoute(req *http.Request) (*Router, *routers.Route, map[string]string, error) {
 	for _, router := range rs {
 		// Skip routers that have DO NOT have servers
-		if len(router.doc.Servers) == 0 {
+		if len(router.Doc.Servers) == 0 {
 			continue
 		}
 		route, pathParams, err := router.FindRoute(req)
@@ -35,7 +35,7 @@ func (rs Routers) FindRoute(req *http.Request) (*Router, *routers.Route, map[str
 	}
 	for _, router := range rs {
 		// Skip routers that DO have servers
-		if len(router.doc.Servers) > 0 {
+		if len(router.Doc.Servers) > 0 {
 			continue
 		}
 		route, pathParams, err := router.FindRoute(req)
@@ -50,8 +50,8 @@ func (rs Routers) FindRoute(req *http.Request) (*Router, *routers.Route, map[str
 
 // Router maps a HTTP request to an OpenAPI operation.
 type Router struct {
-	doc      *openapi3.T
-	pathNode *pathpattern.Node
+	Doc      *openapi3.T
+	PathNode *pathpattern.Node
 }
 
 // NewRouter creates a new router.
@@ -62,8 +62,8 @@ func NewRouter(doc *openapi3.T) (*Router, error) {
 	if err := doc.Validate(context.Background()); err != nil {
 		return nil, fmt.Errorf("validating OpenAPI failed: %v", err)
 	}
-	router := &Router{doc: doc}
-	root := router.node()
+	router := &Router{Doc: doc}
+	root := router.Node()
 	for path, pathItem := range doc.Paths {
 		for method, operation := range pathItem.Operations() {
 			method = strings.ToUpper(method)
@@ -92,14 +92,14 @@ func (router *Router) AddRoute(route *routers.Route) error {
 	if path == "" {
 		return errors.New("route is missing path")
 	}
-	return router.node().Add(method+" "+path, router, nil)
+	return router.Node().Add(method+" "+path, router, nil)
 }
 
-func (router *Router) node() *pathpattern.Node {
-	root := router.pathNode
+func (router *Router) Node() *pathpattern.Node {
+	root := router.PathNode
 	if root == nil {
 		root = &pathpattern.Node{}
-		router.pathNode = root
+		router.PathNode = root
 	}
 	return root
 }
@@ -107,7 +107,7 @@ func (router *Router) node() *pathpattern.Node {
 // FindRoute extracts the route and parameters of an http.Request
 func (router *Router) FindRoute(req *http.Request) (*routers.Route, map[string]string, error) {
 	method, url := req.Method, req.URL
-	doc := router.doc
+	doc := router.Doc
 
 	// Get server
 	servers := doc.Servers
@@ -133,7 +133,7 @@ func (router *Router) FindRoute(req *http.Request) (*routers.Route, map[string]s
 	}
 
 	// Get PathItem
-	root := router.node()
+	root := router.Node()
 	var route *routers.Route
 	node, paramValues := root.Match(method + " " + remainingPath)
 	if node != nil {

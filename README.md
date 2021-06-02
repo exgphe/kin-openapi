@@ -46,15 +46,15 @@ Here's some projects that depend on _kin-openapi_:
 ## Loading OpenAPI document
 Use `openapi3.Loader`, which resolves all references:
 ```go
-doc, err := openapi3.NewLoader().LoadFromFile("swagger.json")
+Doc, err := openapi3.NewLoader().LoadFromFile("swagger.json")
 ```
 
 ## Getting OpenAPI operation that matches request
 ```go
 loader := openapi3.NewLoader()
-doc, _ := loader.LoadFromData([]byte(`...`))
-_ := doc.Validate(loader.Context)
-router, _ := gorillamux.NewRouter(doc)
+Doc, _ := loader.LoadFromData([]byte(`...`))
+_ := Doc.Validate(loader.Context)
+router, _ := gorillamux.NewRouter(Doc)
 route, pathParams, _ := router.FindRoute(httpRequest)
 // Do something with route.Operation
 ```
@@ -77,9 +77,9 @@ import (
 func main() {
 	ctx := context.Background()
 	loader := &openapi3.Loader{Context: ctx}
-	doc, _ := loader.LoadFromFile("openapi3_spec.json")
-	_ := doc.Validate(ctx)
-	router, _ := legacyrouter.NewRouter(doc)
+	Doc, _ := loader.LoadFromFile("openapi3_spec.json")
+	_ := Doc.Validate(ctx)
+	router, _ := legacyrouter.NewRouter(Doc)
 	httpReq, _ := http.NewRequest(http.MethodGet, "/items", nil)
 
 	// Find route
@@ -213,7 +213,7 @@ func arrayUniqueItemsChecker(items []interface{}) bool {
 * Routers' `FindRoute(...)` method now takes only one argument: `*http.Request`
 * `getkin/kin-openapi/openapi3filter.Router` moved to `getkin/kin-openapi/routers/legacy`
 * `openapi3filter.NewRouter()` and its related `WithSwaggerFromFile(string)`, `WithSwagger(*openapi3.Swagger)`, `AddSwaggerFromFile(string)` and `AddSwagger(*openapi3.Swagger)` are all replaced with a single `<router package>.NewRouter(*openapi3.Swagger)`
-	* NOTE: the `NewRouter(doc)` call now requires that the user ensures `doc` is valid (`doc.Validate() != nil`). This used to be asserted.
+	* NOTE: the `NewRouter(Doc)` call now requires that the user ensures `Doc` is valid (`Doc.Validate() != nil`). This used to be asserted.
 
 ### v0.47.0
 Field `(*openapi3.SwaggerLoader).LoadSwaggerFromURIFunc` of type `func(*openapi3.SwaggerLoader, *url.URL) (*openapi3.Swagger, error)` was removed after the addition of the field `(*openapi3.SwaggerLoader).ReadFromURIFunc` of type `func(*openapi3.SwaggerLoader, *url.URL) ([]byte, error)`.
