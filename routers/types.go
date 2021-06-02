@@ -1,15 +1,12 @@
 package routers
 
 import (
-	"net/http"
-
 	"github.com/exgphe/kin-openapi/openapi3"
+	"github.com/exgphe/kin-openapi/routers/legacy"
 )
 
 // Router helps link http.Request.s and an OpenAPIv3 spec
-type Router interface {
-	FindRoute(req *http.Request) (route *Route, pathParams map[string]string, err error)
-}
+type Router = *legacy.Router
 
 // Route describes the operation an http.Request can match
 type Route struct {
