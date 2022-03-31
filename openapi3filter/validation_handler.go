@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/exgphe/kin-openapi/openapi3"
+	"github.com/exgphe/kin-openapi/routers"
 	legacyrouter "github.com/exgphe/kin-openapi/routers/legacy"
 )
 
@@ -19,7 +20,7 @@ type ValidationHandler struct {
 	AuthenticationFunc AuthenticationFunc
 	File               string
 	ErrorEncoder       ErrorEncoder
-	router             *legacyrouter.Router
+	router             routers.Router
 }
 
 func (h *ValidationHandler) Load() error {
