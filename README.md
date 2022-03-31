@@ -211,7 +211,7 @@ func arrayUniqueItemsChecker(items []interface{}) bool {
 * Type `openapi3filter.Route` moved to `routers` (and `Route.Handler` was dropped. See https://github.com/exgphe/kin-openapi/issues/329)
 * Type `openapi3filter.RouteError` moved to `routers` (so did `ErrPathNotFound` and `ErrMethodNotAllowed` which are now `RouteError`s)
 * Routers' `FindRoute(...)` method now takes only one argument: `*http.Request`
-* `exgphe/kin-openapi/openapi3filter.Router` moved to `exgphe/kin-openapi/routers/legacy`
+* `getkin/kin-openapi/openapi3filter.Router` moved to `getkin/kin-openapi/routers/legacy`
 * `openapi3filter.NewRouter()` and its related `WithSwaggerFromFile(string)`, `WithSwagger(*openapi3.Swagger)`, `AddSwaggerFromFile(string)` and `AddSwagger(*openapi3.Swagger)` are all replaced with a single `<router package>.NewRouter(*openapi3.Swagger)`
 	* NOTE: the `NewRouter(Doc)` call now requires that the user ensures `Doc` is valid (`Doc.Validate() != nil`). This used to be asserted.
 
